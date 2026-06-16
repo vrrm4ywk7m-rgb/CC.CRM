@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celine Chien | CRM Strategy Consultant & Customer Growth Advisor</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        crmBlue: '#0073E6',
+                        premiumNavy: '#0A1D37',
+                        luxuryGold: '#42A5FF',
+                        bgSilk: '#F5F7F9',
+                        bgSlate: '#E6E9EC',
+                        textDark: '#0A1D37',
+                        textMuted: '#67727E',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #F5F7F9;
+            color: #0A1D37;
+            overflow-x: hidden;
+        }
+
+        /* 麥肯錫式極簡奢華背景與微幾何網格 */
+        .luxury-bg {
+            background-image: 
+                radial-gradient(circle at 85% 15%, rgba(0, 115, 230, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 15% 75%, rgba(66, 165, 255, 0.06) 0%, transparent 45%),
+                linear-gradient(rgba(10, 29, 55, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(10, 29, 55, 0.06) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 50px 50px, 50px 50px;
+        }
+
+        /* 精緻玻璃擬態卡片 */
+        .glass-card {
+            background: rgba(245, 247, 249, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(230, 233, 236, 0.95);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 115, 230, 0.25);
+            box-shadow: 0 30px 60px -15px rgba(10, 29, 55, 0.08);
+        }
+
+        /* 漸層微光邊框 */
+        .gradient-border {
+            position: relative;
+        }
+        .gradient-border::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(to bottom right, rgba(0, 115, 230, 0.25), transparent, rgba(66, 165, 255, 0.25));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* 客戶旅程抽象流動線條 */
+        .journey-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(0, 115, 230, 0.2), rgba(66, 165, 255, 0.16), transparent);
+            height: 1px;
+            width: 100%;
+            animation: flow 10s linear infinite;
+        }
+        @keyframes flow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* 打字機效果游標 */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 0.8s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* 全域動態顯現樣式 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 頂級商務按鈕翻轉動畫 */
+        .premium-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .premium-btn .btn-text-hover {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, 0);
+            width: 100%;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+        }
+        .premium-btn .btn-text-default {
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .premium-btn:hover {
+            background-color: #0A1D37 !important;
+            box-shadow: 0 15px 30px -5px rgba(10, 29, 55, 0.25);
+        }
+        .premium-btn:hover .btn-text-default {
+            transform: translateY(-150%);
+            opacity: 0;
+        }
+        .premium-btn:hover .btn-text-hover {
+            top: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 1;
+        }
+
+        /* Palette overrides for neutral utility classes */
+        .text-textMuted {
+            color: #67727E !important;
+        }
+        .text-textMuted {
+            color: #67727E !important;
+        }
+        .text-slate-200 {
+            color: #AAB4C1 !important;
+        }
+        .border-slate-200 {
+            border-color: rgba(230, 233, 236, 0.9) !important;
+        }
+        .border-slate-200 {
+            border-color: rgba(230, 233, 236, 0.8) !important;
+        }
+        .bg-bgSilk {
+            background-color: #F5F7F9 !important;
+        }
+    </style>
+</head>
+<body class="luxury-bg antialiased">
+
+    <!-- 1. 頂級導覽列 Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-transparent" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+            <a href="#" class="flex flex-col">
+                <span class="text-xl font-semibold tracking-widest text-textDark">CELINE CHIEN</span>
+                <span class="text-[9px] tracking-[0.25em] text-luxuryGold font-medium uppercase mt-0.5">CRM Strategy Consultant</span>
+            </a>
+            
+            <!-- 桌面端核心選單 -->
+            <div class="hidden md:flex items-center space-x-10">
+                <a href="#" class="text-xs font-medium text-textDark hover:text-crmBlue transition-colors tracking-wider">首頁 <span class="block text-[9px] text-textMuted font-normal mt-0.5 uppercase tracking-normal">Home</span></a>
+                <a href="#about" class="text-xs font-medium text-textDark hover:text-crmBlue transition-colors tracking-wider">關於我 <span class="block text-[9px] text-textMuted font-normal mt-0.5 uppercase tracking-normal">About Me</span></a>
+                <a href="#framework" class="text-xs font-medium text-textDark hover:text-crmBlue transition-colors tracking-wider">核心方法論 <span class="block text-[9px] text-textMuted font-normal mt-0.5 uppercase tracking-normal">Framework</span></a>
+                <a href="#solutions" class="text-xs font-medium text-textDark hover:text-crmBlue transition-colors tracking-wider">解決方案 <span class="block text-[9px] text-textMuted font-normal mt-0.5 uppercase tracking-normal">Solutions</span></a>
+                <a href="#cases" class="text-xs font-medium text-textDark hover:text-crmBlue transition-colors tracking-wider">成功案例 <span class="block text-[9px] text-textMuted font-normal mt-0.5 uppercase tracking-normal">Case Studies</span></a>
+                <a href="#insights" class="text-xs font-medium text-textDark hover:text-crmBlue transition-colors tracking-wider">觀點洞察 <span class="block text-[9px] text-textMuted font-normal mt-0.5 uppercase tracking-normal">Insights</span></a>
+                
+                <a href="https://calendar.app.google/pjgiY6JdJVad8Qtc6" target="_blank" class="premium-btn bg-textDark text-white px-6 py-3 text-xs font-medium tracking-widest uppercase rounded-none border border-textDark">
+                    <span class="btn-text-default">預約策略諮詢</span>
+                    <span class="btn-text-hover">Ready to Grow</span>
+                </a>
+            </div>
+
+            <!-- 行動端選單觸發按鈕 -->
+            <button class="md:hidden text-textDark focus:outline-none" id="menu-btn" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars-staggered text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- 行動端選單面版 -->
+        <div class="hidden md:hidden bg-bgSilk/95 backdrop-blur-xl border-b border-slate-200 px-8 py-10 space-y-6 absolute top-20 left-0 w-full shadow-xl" id="mobile-menu">
+            <a href="#" class="block text-sm font-medium text-textDark py-2 border-b border-slate-200">首頁 <span class="text-xs text-textMuted ml-2 font-light">Home</span></a>
+            <a href="#about" class="block text-sm font-medium text-textDark py-2 border-b border-slate-200">關於我 <span class="text-xs text-textMuted ml-2 font-light">About Me</span></a>
+            <a href="#framework" class="block text-sm font-medium text-textDark py-2 border-b border-slate-200">核心方法論 <span class="text-xs text-textMuted ml-2 font-light">Framework</span></a>
+            <a href="#solutions" class="block text-sm font-medium text-textDark py-2 border-b border-slate-200">解決方案 <span class="text-xs text-textMuted ml-2 font-light">Solutions</span></a>
+            <a href="#cases" class="block text-sm font-medium text-textDark py-2 border-b border-slate-200">成功案例 <span class="text-xs text-textMuted ml-2 font-light">Case Studies</span></a>
+            <a href="#insights" class="block text-sm font-medium text-textDark py-2 border-b border-slate-200">觀點洞察 <span class="text-xs text-textMuted ml-2 font-light">Insights</span></a>
+            <a href="https://calendar.app.google/pjgiY6JdJVad8Qtc6" target="_blank" class="block w-full text-center bg-crmBlue text-white py-3.5 text-xs font-semibold tracking-widest uppercase">預約策略諮詢 Book a Session</a>
+        </div>
+    </nav>
+
+    <!-- 2. Hero 頂級大器首頁區塊 -->
+    <header class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <!-- 背景輕量浮動粒子美學 -->
+        <div class="absolute top-1/4 right-0 w-[500px] h-[500px] bg-crmBlue/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-10 left-0 w-[400px] h-[400px] bg-luxuryGold/4 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="journey-line top-1/2"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
+            <div class="lg:col-span-8 space-y-8">
+                <!-- 輪播動態文字標籤 -->
+                <div class="inline-flex items-center space-x-3 bg-bgSlate px-4 py-2 border border-slate-200/80">
+                    <span class="w-2 h-2 rounded-full bg-crmBlue animate-ping"></span>
+                    <span id="typing-text" class="text-xs font-semibold tracking-widest text-premiumNavy uppercase typing-cursor"></span>
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl font-bold text-textDark tracking-tight leading-[1.15]">
+                    打造以客戶為核心的<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-premiumNavy via-crmBlue to-premiumNavy">成長引擎</span>
+                </h1>
+                
+                <p class="text-base md:text-lg text-textMuted max-w-2xl leading-relaxed font-light">
+                    透過 CRM 策略、客戶洞察與 MarTech 科技，協助企業提升客戶價值、強化品牌忠誠度，並創造可持續的商業成長。
+                </p>
+
+                <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-5">
+                    <a href="https://calendar.app.google/pjgiY6JdJVad8Qtc6" target="_blank" class="premium-btn bg-crmBlue text-white px-8 py-4 text-xs font-semibold tracking-widest uppercase rounded-none flex items-center justify-center space-x-3">
+                        <span class="btn-text-default">預約策略諮詢</span>
+                        <span class="btn-text-hover">Ready to Grow</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                        <a href="#cases" class="border border-slate-200 bg-bgSilk/70 backdrop-blur-sm hover:bg-bgSilk text-textDark px-8 py-4 text-xs font-semibold tracking-widest uppercase rounded-none transition-all flex items-center justify-center">
+                        查看成功案例 <span class="text-[10px] text-textMuted font-normal ml-2 uppercase">View Case Studies</span>
+                    </a>
+                </div>
+
+                <!-- 品牌標語矩陣 -->
+                <div class="pt-12 border-t border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <p class="text-xs uppercase tracking-[0.25em] text-luxuryGold font-bold">Designing Growth Through CRM.</p>
+                        <p class="text-sm text-textMuted mt-1 font-light">以客戶為核心，驅動企業成長。</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-[0.25em] text-textMuted font-bold">Turning Customer Data into Customer Loyalty.</p>
+                        <p class="text-sm text-textMuted mt-1 font-light">讓數據創造忠誠，讓關係驅動成長。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右側奢華視覺架構（高階數據分層模擬） -->
+            <div class="lg:col-span-4 hidden lg:flex justify-end relative">
+                <div class="w-80 h-[480px] bg-gradient-to-b from-bgSlate to-white p-1 border border-slate-200 relative gradient-border">
+                    <div class="w-full h-full bg-bgSilk p-8 flex flex-col justify-between relative overflow-hidden">
+                        <div class="space-y-4">
+                            <div class="text-[9px] tracking-[0.25em] text-textMuted uppercase font-bold">Luxury Client Framework</div>
+                            <div class="h-12 bg-premiumNavy/5 border-l-2 border-premiumNavy flex items-center px-4 justify-between">
+                                <span class="text-xs font-medium text-premiumNavy">VIC Engagement</span>
+                                <span class="text-[11px] text-luxuryGold font-bold">+40% Rev</span>
+                            </div>
+                            <div class="h-12 bg-crmBlue/5 border-l-2 border-crmBlue flex items-center px-4 justify-between">
+                                <span class="text-xs font-medium text-crmBlue">Data-Driven Retention</span>
+                                <span class="text-[11px] text-crmBlue font-bold">2X ROI</span>
+                            </div>
+                            <div class="h-12 bg-bgSilk border-l-2 border-slate-300 flex items-center px-4 justify-between">
+                                <span class="text-xs font-medium text-textMuted">CLTV Optimization</span>
+                                <span class="text-[11px] text-textMuted">Scale Up</span>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-2 pt-6 border-t border-slate-200">
+                            <div class="text-2xl font-bold text-textDark tracking-tight font-sans">Celine Chien</div>
+                            <div class="text-[10px] tracking-[0.15em] text-luxuryGold font-medium uppercase">CRM Strategy Consultant</div>
+                            <p class="text-[11px] text-textMuted leading-relaxed pt-2 font-light">
+                                Ex-LVMH, Kering, L'Oréal Group Region Lead. 擁有十多年國際頂級品牌大中華區全渠道增長實戰與數位轉型經驗。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. 關於我與高階時間軸 About Me & Timeline -->
+    <section id="about" class="py-28 bg-bgSilk border-y border-slate-200 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                
+                <!-- 左側固定品牌定位 -->
+                <div class="lg:col-span-4 reveal">
+                    <div class="sticky top-28 space-y-6">
+                        <div>
+                            <h2 class="text-3xl font-bold text-textDark tracking-tight font-sans">關於我</h2>
+                            <span class="text-xs uppercase tracking-[0.2em] text-luxuryGold font-bold block mt-1">About Me</span>
+                        </div>
+                        <p class="text-sm text-textMuted leading-relaxed font-light">
+                            我是 Celine Chien，一位專注於 CRM 經營策略、客戶體驗管理、MarTech 行銷科技與消費者洞察的顧問。
+                        </p>
+                        <div class="border-t border-slate-200/60 pt-6 space-y-2">
+                            <div class="text-xs font-medium text-textDark uppercase tracking-wider">Expertise Labels / 專業標籤</div>
+                            <div class="flex flex-wrap gap-1.5 pt-2">
+                                <span class="text-[10px] bg-bgSilk text-textMuted px-2 py-1 border border-slate-200">CRM 策略顧問</span>
+                                <span class="text-[10px] bg-bgSilk text-textMuted px-2 py-1 border border-slate-200">客戶成長顧問</span>
+                                <span class="text-[10px] bg-bgSilk text-textMuted px-2 py-1 border border-slate-200">高價值客戶經營專家</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右側核心履歷實戰與痛點解構 -->
+                <div class="lg:col-span-8 space-y-16">
+                    <!-- 我是誰深度內容 -->
+                    <div class="reveal space-y-4">
+                        <h3 class="text-lg font-bold text-textDark flex items-center"><span class="w-1.5 h-1.5 bg-crmBlue mr-3"></span>實戰背景 / Professional Journey</h3>
+                        <p class="text-sm text-textMuted leading-relaxed font-light">
+                            過去十多年來，我曾服務於國際精品、消費品與零售產業，包含 <strong>LVMH、Kering 與 L'Oréal 集團</strong>，負責大中華區 CRM 線上與線下策略、高價值客戶經營、會員生態系建構與數位轉型專案。
+                        </p>
+                        <p class="text-sm text-textMuted leading-relaxed font-light">
+                            我擅長將數據分析、客戶洞察與商業策略深度結合，協助企業打破跨部門資料藩籬，建立可規模化且可持續成長的客戶經營獲利模型。
+                        </p>
+                    </div>
+
+                    <!-- 履歷里程碑時間軸 Timeline -->
+                    <div class="reveal space-y-6">
+                        <h3 class="text-lg font-bold text-textDark flex items-center"><span class="w-1.5 h-1.5 bg-crmBlue mr-3"></span>核心執掌與戰績 / Career Milestones</h3>
+                        <div class="relative border-l border-slate-200 pl-6 space-y-8 ml-2">
+                            <!-- 節點 1 -->
+                            <div class="relative">
+                                <div class="absolute -left-[31px] top-1 w-2.5 h-2.5 bg-luxuryGold rounded-full border-4 border-bgSilk"></div>
+                                <div class="text-xs font-bold text-luxuryGold tracking-wider uppercase">LVMH Group</div>
+                                <h4 class="text-sm font-bold text-textDark mt-0.5">大中華區核心品牌 CRM 戰略與 VIC 經營主管</h4>
+                                <p class="text-xs text-textMuted mt-2 font-light leading-relaxed">
+                                    主導頂級精品全渠道會員體驗再造，推動第一線 Clienteling 數位賦能，成功拉高頂級高淨值 VIC 客戶年度客單價與回購貢獻佔比。
+                                </p>
+                            </div>
+                            <!-- 節點 2 -->
+                            <div class="relative">
+                                <div class="absolute -left-[31px] top-1 w-2.5 h-2.5 bg-crmBlue rounded-full border-4 border-bgSilk"></div>
+                                <div class="text-xs font-bold text-crmBlue tracking-wider uppercase">Kering Group</div>
+                                <h4 class="text-sm font-bold text-textDark mt-0.5">亞太區數位轉型與 Social CRM 資深專家</h4>
+                                <p class="text-xs text-textMuted mt-2 font-light leading-relaxed">
+                                    規劃亞太主要市場私域流量體系（LINE / WeChat），打通全渠道客戶接觸點，實現千人千面的行銷自動化分流與精準溝通。
+                                </p>
+                            </div>
+                            <!-- 節點 3 -->
+                            <div class="relative">
+                                <div class="absolute -left-[31px] top-1 w-2.5 h-2.5 bg-slate-400 rounded-full border-4 border-bgSilk"></div>
+                                <div class="text-xs font-bold text-textMuted tracking-wider uppercase">L'Oréal Group</div>
+                                <h4 class="text-sm font-bold text-textDark mt-0.5">大中華區美妝巨頭數據洞察與 MarTech 經理</h4>
+                                <p class="text-xs text-textMuted mt-2 font-light leading-relaxed">
+                                    導入大型 CDP 全域客戶數據平台與智慧行銷自動化工具，清洗海量消費者行為標籤，有效優化高頻消費品之客戶生命週期價值 (CLTV)。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 我服務誰核心網格 -->
+                    <div class="reveal space-y-4">
+                        <h3 class="text-lg font-bold text-textDark flex items-center"><span class="w-1.5 h-1.5 bg-crmBlue mr-3"></span>核心服務對象 / Target Audience</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <div class="bg-bgSilk p-4 border border-slate-200 font-medium text-xs text-textDark flex items-center shadow-sm"><i class="fa-solid fa-gem text-luxuryGold mr-3"></i> 精品品牌 / Luxury</div>
+                            <div class="bg-bgSilk p-4 border border-slate-200 font-medium text-xs text-textDark flex items-center shadow-sm"><i class="fa-solid fa-sparkles text-luxuryGold mr-3"></i> 美妝品牌 / Beauty</div>
+                            <div class="bg-bgSilk p-4 border border-slate-200 font-medium text-xs text-textDark flex items-center shadow-sm"><i class="fa-solid fa-shirt text-luxuryGold mr-3"></i> 時尚品牌 / Fashion</div>
+                            <div class="bg-bgSilk p-4 border border-slate-200 font-medium text-xs text-textDark flex items-center shadow-sm"><i class="fa-solid fa-shop text-crmBlue mr-3"></i> 零售品牌 / Retail</div>
+                            <div class="bg-bgSilk p-4 border border-slate-200 font-medium text-xs text-textDark flex items-center shadow-sm"><i class="fa-solid fa-laptop text-crmBlue mr-3"></i> 電商品牌 / E-commerce</div>
+                            <div class="bg-bgSilk p-4 border border-slate-200 font-medium text-xs text-textDark flex items-center shadow-sm"><i class="fa-solid fa-bag-shopping text-crmBlue mr-3"></i> 消費品牌 / FMCG</div>
+                        </div>
+                    </div>
+
+                    <!-- 痛點解構 -->
+                    <div class="reveal space-y-4">
+                        <h3 class="text-lg font-bold text-textDark flex items-center"><span class="w-1.5 h-1.5 bg-crmBlue mr-3"></span>解構企業常見問題 / Pain Points We Solve</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-bgSilk p-5 border border-red-100/60 rounded-none relative">
+                                <div class="text-xs font-bold text-red-500 uppercase tracking-wider mb-2">✕ 常見增長瓶頸</div>
+                                <ul class="text-xs text-textMuted space-y-2 font-light">
+                                    <li>• CRM ROI 不明確，決策者難以衡量工具成效</li>
+                                    <li>• 缺乏精細化分層，導致核心高價值 VIC 客戶流失</li>
+                                    <li>• 線上與線下客戶資料極度分散，渠道各自為政</li>
+                                    <li>• 官方帳號互動率與自動化行銷效益流於表面</li>
+                                </ul>
+                            </div>
+                            <div class="bg-bgSilk p-5 border border-emerald-100/60 rounded-none relative">
+                                <div class="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-2">✓ 落地解決方案</div>
+                                <ul class="text-xs text-textMuted space-y-2 font-light">
+                                    <li>• 打造完整「獲客 → 留存 → 增購 → 忠誠度」機制</li>
+                                    <li>• 結合第一線實戰，讓技術架構與消費者體驗對齊</li>
+                                    <li>• 量化核心指標，全面拉高活躍會員數與終身價值</li>
+                                    <li>• 建構可規模化且具高度延展性的會員生態系藍圖</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 新增：高階顧問核心方法論 Framework -->
+    <section id="framework" class="py-24 bg-bgSilk relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center max-w-xl mx-auto mb-16 reveal">
+                <h2 class="text-3xl font-bold text-textDark tracking-tight">核心方法論</h2>
+                <span class="text-xs uppercase tracking-[0.2em] text-luxuryGold font-semibold block mt-1">Strategic Framework</span>
+                <p class="text-sm text-textMuted mt-4 font-light">
+                    借鑑 McKinsey 與 Bain 的嚴謹架構，以數據為骨幹、以奢華體驗為靈魂的頂層商業增長模型。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+                <div class="p-6 border border-slate-200 bg-bgSlate/50 flex flex-col items-center space-y-3 reveal">
+                    <div class="w-8 h-8 rounded-full bg-premiumNavy text-white flex items-center justify-center text-xs font-bold">1</div>
+                    <h4 class="text-sm font-bold text-textDark">數據架構審計</h4>
+                    <p class="text-xs text-textMuted font-light leading-relaxed">全面盤點 CDP、CRM 系統盲區，清洗出高變現價值的黃金行為標籤。</p>
+                </div>
+                <div class="p-6 border border-slate-200 bg-bgSlate/50 flex flex-col items-center space-y-3 reveal">
+                    <div class="w-8 h-8 rounded-full bg-premiumNavy text-white flex items-center justify-center text-xs font-bold">2</div>
+                    <h4 class="text-sm font-bold text-textDark">高管戰略藍圖</h4>
+                    <p class="text-xs text-textMuted font-light leading-relaxed">為企業決策者定制 1-3 年會員生態演進藍圖，對齊核心商業目標。</p>
+                </div>
+                <div class="p-6 border border-slate-200 bg-bgSlate/50 flex flex-col items-center space-y-3 reveal">
+                    <div class="w-8 h-8 rounded-full bg-premiumNavy text-white flex items-center justify-center text-xs font-bold">3</div>
+                    <h4 class="text-sm font-bold text-textDark">全渠道場景落地</h4>
+                    <p class="text-xs text-textMuted font-light leading-relaxed">打通線上私域自動化與線下專櫃 Clienteling，確保品牌調性完美一致。</p>
+                </div>
+                <div class="p-6 border border-slate-200 bg-bgSlate/50 flex flex-col items-center space-y-3 reveal">
+                    <div class="w-8 h-8 rounded-full bg-premiumNavy text-white flex items-center justify-center text-xs font-bold">4</div>
+                    <h4 class="text-sm font-bold text-textDark">ROI 持續優化</h4>
+                    <p class="text-xs text-textMuted font-light leading-relaxed">建立滾動式 A/B 測試與監測漏斗，讓每一筆行銷科技預算皆可量化成效。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 解決方案服務 Solutions -->
+    <section id="solutions" class="py-24 bg-bgSlate/40 border-t border-slate-200 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center max-w-xl mx-auto mb-16 reveal">
+                <h2 class="text-3xl font-bold text-textDark tracking-tight">解決方案</h2>
+                <span class="text-xs uppercase tracking-[0.2em] text-luxuryGold font-semibold block mt-1">Solutions</span>
+                <p class="text-sm text-textMuted mt-4 font-light">模組化的高端品牌專屬核心服務，解決企業留存與變現的結構性難題。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 解決方案 1 -->
+                <div class="glass-card p-8 flex flex-col justify-between h-72 reveal">
+                    <div>
+                        <div class="w-10 h-10 bg-bgSlate flex items-center justify-center text-premiumNavy text-xs font-bold mb-6 border border-slate-200">01</div>
+                        <h3 class="text-base font-bold text-textDark">CRM 策略規劃</h3>
+                        <span class="text-[10px] text-textMuted block uppercase tracking-wider mt-0.5">CRM Strategy</span>
+                        <p class="text-xs text-textMuted mt-4 font-light leading-relaxed">建立會員生命週期成長藍圖與 CRM 全盤營運架構，將數據轉化為商業資產。</p>
+                    </div>
+                </div>
+                <!-- 解決方案 2 -->
+                <div class="glass-card p-8 flex flex-col justify-between h-72 reveal">
+                    <div>
+                        <div class="w-10 h-10 bg-bgSlate flex items-center justify-center text-premiumNavy text-xs font-bold mb-6 border border-slate-200">02</div>
+                        <h3 class="text-base font-bold text-textDark">會員經營與忠誠度管理</h3>
+                        <span class="text-[10px] text-textMuted block uppercase tracking-wider mt-0.5">Loyalty & Retention</span>
+                        <p class="text-xs text-textMuted mt-4 font-light leading-relaxed">優化回購機制與高價值客戶（VIC）專屬經營體系，最大化客終身價值 (CLTV)。</p>
+                    </div>
+                </div>
+                <!-- 解決方案 3 -->
+                <div class="glass-card p-8 flex flex-col justify-between h-72 reveal">
+                    <div>
+                        <div class="w-10 h-10 bg-bgSlate flex items-center justify-center text-premiumNavy text-xs font-bold mb-6 border border-slate-200">03</div>
+                        <h3 class="text-base font-bold text-textDark">MarTech 導入顧問</h3>
+                        <span class="text-[10px] text-textMuted block uppercase tracking-wider mt-0.5">MarTech Consulting</span>
+                        <p class="text-xs text-textMuted mt-4 font-light leading-relaxed">專業導入 CDP、SFMC、Marketing Automation 等全方位行銷科技技術堆疊。</p>
+                    </div>
+                </div>
+                <!-- 解決方案 4 -->
+                <div class="glass-card p-8 flex flex-col justify-between h-72 reveal">
+                    <div>
+                        <div class="w-10 h-10 bg-bgSlate flex items-center justify-center text-premiumNavy text-xs font-bold mb-6 border border-slate-200">04</div>
+                        <h3 class="text-base font-bold text-textDark">Social CRM 與私域經營</h3>
+                        <span class="text-[10px] text-textMuted block uppercase tracking-wider mt-0.5">Social CRM</span>
+                        <p class="text-xs text-textMuted mt-4 font-light leading-relaxed">打通 LINE、WeChat 全矩陣私域生態體系，建構高轉化率的自動化溝通模型。</p>
+                    </div>
+                </div>
+                <!-- 解決方案 5 -->
+                <div class="glass-card p-8 flex flex-col justify-between h-72 reveal">
+                    <div>
+                        <div class="w-10 h-10 bg-bgSlate flex items-center justify-center text-premiumNavy text-xs font-bold mb-6 border border-slate-200">05</div>
+                        <h3 class="text-base font-bold text-textDark">消費者洞察分析</h3>
+                        <span class="text-[10px] text-textMuted block uppercase tracking-wider mt-0.5">Consumer Insights</span>
+                        <p class="text-xs text-textMuted mt-4 font-light leading-relaxed">深度挖掘用戶核心行為數據與消費路徑，精準找出影響企業成長的關鍵指標。</p>
+                    </div>
+                </div>
+                <!-- 解決方案 6 -->
+                <div class="glass-card p-8 flex flex-col justify-between h-72 reveal">
+                    <div>
+                        <div class="w-10 h-10 bg-bgSlate flex items-center justify-center text-premiumNavy text-xs font-bold mb-6 border border-slate-200">06</div>
+                        <h3 class="text-base font-bold text-textDark">客戶成長策略</h3>
+                        <span class="text-[10px] text-textMuted block uppercase tracking-wider mt-0.5">Customer Growth</span>
+                        <p class="text-xs text-textMuted mt-4 font-light leading-relaxed">結合定量分析與定性體驗設計，建立高度抗衰退、可持續運作的增長模型。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. 成功案例 Case Studies -->
+    <section id="cases" class="py-24 bg-bgSlate relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 reveal">
+                <div>
+                    <h2 class="text-3xl font-bold text-textDark tracking-tight">成功案例</h2>
+                    <span class="text-xs uppercase tracking-[0.2em] text-luxuryGold font-semibold block mt-1">Case Studies</span>
+                </div>
+                <!-- 高級顧問級別分類標籤 -->
+                <div class="flex flex-wrap gap-2 mt-6 md:mt-0 max-w-xl">
+                    <span class="px-3 py-1 bg-bgSilk text-[11px] font-medium text-premiumNavy border border-slate-200">Luxury Retail</span>
+                    <span class="px-3 py-1 bg-bgSilk text-[11px] font-medium text-textMuted border border-slate-200">Beauty Industry</span>
+                    <span class="px-3 py-1 bg-bgSilk text-[11px] font-medium text-textMuted border border-slate-200">CRM Transformation</span>
+                    <span class="px-3 py-1 bg-bgSilk text-[11px] font-medium text-textMuted border border-slate-200">Customer Growth</span>
+                    <span class="px-3 py-1 bg-bgSilk text-[11px] font-medium text-textMuted border border-slate-200">VIC Engagement</span>
+                    <span class="px-3 py-1 bg-bgSilk text-[11px] font-medium text-textMuted border border-slate-200">Omnichannel Experience</span>
+                </div>
+            </div>
+
+            <!-- 高級商業案例網格 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 案例 1 -->
+                <div class="bg-bgSilk p-8 md:p-10 border border-slate-200 flex flex-col justify-between space-y-8 reveal shadow-sm">
+                    <div>
+                        <div class="text-[11px] font-bold uppercase tracking-widest text-luxuryGold mb-2">Luxury Retail / VIC Engagement</div>
+                        <h3 class="text-xl font-bold text-textDark leading-snug">頂級歐洲精品集團大中華區 VIC 會員生態系再造</h3>
+                        <p class="text-xs text-textMuted font-light mt-4 leading-relaxed">
+                            針對跨品牌資料碎片化痛點，重新規劃頂級高淨值 VIC 的忠誠度階梯與跨地域尊榮禮遇。透過精準對話式 Clienteling 工具賦能線下數百家專櫃，讓第一線人員具備即時預測客戶偏好的能力。
+                        </p>
+                    </div>
+                    <!-- 麥肯錫風格大型關鍵成果數據卡 -->
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200 text-center">
+                        <div>
+                            <div class="text-3xl md:text-4xl font-bold text-premiumNavy tracking-tight">+40%</div>
+                            <div class="text-[9px] text-textMuted uppercase tracking-wider mt-1.5">VIC Revenue Growth</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl md:text-4xl font-bold text-premiumNavy tracking-tight">2X</div>
+                            <div class="text-[9px] text-textMuted uppercase tracking-wider mt-1.5">CRM ROI</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl md:text-4xl font-bold text-premiumNavy tracking-tight">+10%</div>
+                            <div class="text-[9px] text-textMuted uppercase tracking-wider mt-1.5">Active VIC Growth</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 案例 2 -->
+                <div class="bg-bgSilk p-8 md:p-10 border border-slate-200 flex flex-col justify-between space-y-8 reveal shadow-sm">
+                    <div>
+                        <div class="text-[11px] font-bold uppercase tracking-widest text-crmBlue mb-2">Beauty Industry / CRM Transformation</div>
+                        <h3 class="text-xl font-bold text-textDark leading-snug">亞太區美妝品牌矩陣私域自動化與生命週期建構</h3>
+                        <p class="text-xs text-textMuted font-light mt-4 leading-relaxed">
+                            為跨國美妝巨頭導入 CDP 系統，清洗並整合千萬級線上與實體通路會員資料。透過 Salesforce Marketing Cloud 搭建高敏捷的行銷自動化旅程，實現基於消費者回購週期的千人千面精準促動。
+                        </p>
+                    </div>
+                    <!-- 大型數據卡 -->
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200 text-center">
+                        <div>
+                            <div class="text-3xl md:text-4xl font-bold text-textDark tracking-tight">+28%</div>
+                            <div class="text-[9px] text-textMuted uppercase tracking-wider mt-1.5">Repurchase Rate</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl md:text-4xl font-bold text-textDark tracking-tight">3.5X</div>
+                            <div class="text-[9px] text-textMuted uppercase tracking-wider mt-1.5">Campaign ROI</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl md:text-4xl font-bold text-textDark tracking-tight">-15%</div>
+                            <div class="text-[9px] text-textMuted uppercase tracking-wider mt-1.5">Churn Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. 觀點洞察 Insights -->
+    <section id="insights" class="py-24 bg-bgSilk relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center max-w-xl mx-auto mb-16 reveal">
+                <h2 class="text-3xl font-bold text-textDark tracking-tight">觀點洞察</h2>
+                <span class="text-xs uppercase tracking-[0.2em] text-luxuryGold font-semibold block mt-1">Insights</span>
+                <p class="text-sm text-textMuted mt-4 font-light">高管前沿思想解讀與 CRM 前瞻實戰白皮書</p>
+            </div>
+
+            <!-- 頂級商業雜誌排版 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 文章 1 -->
+                <article class="group cursor-pointer reveal">
+                    <div class="border-b border-slate-200 pb-6 transition-all group-hover:border-textDark">
+                        <div class="text-[10px] font-bold text-luxuryGold uppercase tracking-widest mb-3">Luxury Clienteling</div>
+                        <h3 class="text-base font-bold text-textDark group-hover:text-crmBlue transition-colors leading-snug">
+                            解密頂級精品 VIC 的「情感與數據學」：如何讓高價值客戶對品牌產生不可逆的忠誠？
+                        </h3>
+                        <p class="text-xs text-textMuted font-light mt-4 line-clamp-3 leading-relaxed">
+                            在數位轉型紅海中，高淨值資產客戶在意的不再是標準化折扣或促銷推播，而是品牌如何透過深度數據清洗，在對的地點、對的時間提供近乎預知般的尊榮體驗...
+                        </p>
+                        <div class="text-[10px] text-textMuted font-medium mt-6 uppercase tracking-wider flex items-center justify-between">
+                            <span>June 2026</span>
+                            <i class="fa-solid fa-arrow-right-long opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-2 text-crmBlue"></i>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 文章 2 -->
+                <article class="group cursor-pointer reveal">
+                    <div class="border-b border-slate-200 pb-6 transition-all group-hover:border-textDark">
+                        <div class="text-[10px] font-bold text-crmBlue uppercase tracking-widest mb-3">MarTech & CDP</div>
+                        <h3 class="text-base font-bold text-textDark group-hover:text-crmBlue transition-colors leading-snug">
+                            企業導入 CDP 的三大盲區：為什麼 spent 數千萬預算卻只換來一堆無法轉化的靜態標籤？
+                        </h3>
+                        <p class="text-xs text-textMuted font-light mt-4 line-clamp-3 leading-relaxed">
+                            許多零售與電商企業常誤將「技術工具導入」視為數位轉型的終點。缺乏以商業增長策略為核心的導向，再強大的 MarTech 架構都將流於昂貴的數據垃圾場...
+                        </p>
+                        <div class="text-[10px] text-textMuted font-medium mt-6 uppercase tracking-wider flex items-center justify-between">
+                            <span>May 2026</span>
+                            <i class="fa-solid fa-arrow-right-long opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-2 text-crmBlue"></i>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 文章 3 -->
+                <article class="group cursor-pointer reveal">
+                    <div class="border-b border-slate-200 pb-6 transition-all group-hover:border-textDark">
+                        <div class="text-[10px] font-bold text-textDark uppercase tracking-widest mb-3">CRM Strategy</div>
+                        <h3 class="text-base font-bold text-textDark group-hover:text-crmBlue transition-colors leading-snug">
+                            從零構建全渠道客戶終身價值 (CLTV) 模型：驅動企業零售逆勢成長的核心指標
+                        </h3>
+                        <p class="text-xs text-textMuted font-light mt-4 line-clamp-3 leading-relaxed">
+                            在流量紅利消失、獲客成本攀升的時代，客戶留存率每提升 5%，利潤將可能成長超過 25%。本文為品牌決策者完整拆解如何建立高健康度會員回購漏斗...
+                        </p>
+                        <div class="text-[10px] text-textMuted font-medium mt-6 uppercase tracking-wider flex items-center justify-between">
+                            <span>April 2026</span>
+                            <i class="fa-solid fa-arrow-right-long opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-2 text-crmBlue"></i>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. 聯絡我 Contact Call to Action -->
+    <section id="contact" class="py-28 bg-gradient-to-br from-textDark via-premiumNavy to-textDark text-white relative overflow-hidden">
+        <!-- 幾何流動線條特效背景 -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <div class="journey-line top-1/3"></div>
+            <div class="journey-line top-2/3" style="animation-delay: -5s;"></div>
+        </div>
+        
+        <div class="max-w-5xl mx-auto px-6 text-center relative z-10 space-y-8 reveal">
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white font-sans">
+                立即開始您的 CRM 成長計畫
+            </h2>
+            <span class="text-xs uppercase tracking-[0.25em] text-luxuryGold font-semibold block">
+                Start Your Customer Growth Journey
+            </span>
+            <p class="text-xs md:text-sm text-slate-300 max-w-xl mx-auto font-light leading-relaxed">
+                不論是需要為旗下品牌建立高規格的 VIC 客戶經營體系、診斷現有 MarTech 工具成效，亦或是規劃全面的企業全渠道會員生態系，讓我們攜手為品牌啟動下一個指數級增長。
+            </p>
+
+            <div class="grid gap-6 md:grid-cols-3 mt-12 text-left">
+                <a href="https://yourwebsite.com/crm-strategy" target="_blank" class="glass-card p-6 border border-slate-200/20 hover:border-crmBlue transition duration-300">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-crmBlue/10 text-crmBlue text-xl">
+                            <i class="fa-solid fa-users"></i>
+                        </span>
+                        <span class="text-[10px] uppercase tracking-[0.25em] text-luxuryGold font-semibold">CRM 策略規劃</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">CRM 策略規劃與會員成長</h3>
+                    <p class="text-sm text-slate-200 leading-relaxed">協助企業建立完整 CRM 成長藍圖，包含會員分級制度、客戶生命週期管理、客戶留存策略與忠誠度計畫設計，將會員經營轉化為可衡量的營收成長與長期客戶價值。</p>
+                </a>
+
+                <a href="https://yourwebsite.com/martech" target="_blank" class="glass-card p-6 border border-slate-200/20 hover:border-crmBlue transition duration-300">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-crmBlue/10 text-crmBlue text-xl">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </span>
+                        <span class="text-[10px] uppercase tracking-[0.25em] text-luxuryGold font-semibold">MarTech 與 Social CRM</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">MarTech 與 Social CRM 導入</h3>
+                    <p class="text-sm text-slate-200 leading-relaxed">協助企業整合 CDP、SFMC、LINE OA、WeChat 等 MarTech 工具，建立數據驅動的自動化客戶旅程與全通路會員經營體系，提升行銷效率與 CRM ROI。</p>
+                </a>
+
+                <a href="https://yourwebsite.com/customer-growth" target="_blank" class="glass-card p-6 border border-slate-200/20 hover:border-crmBlue transition duration-300">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-crmBlue/10 text-crmBlue text-xl">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </span>
+                        <span class="text-[10px] uppercase tracking-[0.25em] text-luxuryGold font-semibold">客戶成長洞察</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Consumer Insights 與 Customer Growth</h3>
+                    <p class="text-sm text-slate-200 leading-relaxed">透過消費者洞察、客戶分群、CLTV 分析與商業策略規劃，找出影響業績成長的關鍵機會點，協助企業提升客戶價值、優化客戶體驗並驅動可持續成長。</p>
+                </a>
+            </div>
+
+            <div class="mt-10 rounded-3xl border border-slate-200 bg-bgSilk/95 p-6 shadow-lg">
+                <div class="mb-4">
+                    <p class="text-xs uppercase tracking-[0.25em] text-textMuted font-semibold">External Dependencies</p>
+                    <p class="mt-2 text-sm text-textMuted max-w-2xl">以下是我在 CRM、MarTech 與成長策略中常用的合作與聯繫渠道。</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-3 mb-5">
+                    <a href="XXX" target="_blank" class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-bgSilk px-4 py-2 text-sm font-semibold text-textDark hover:bg-crmBlue hover:text-white transition">
+                        <i class="fa-brands fa-line"></i><span>LINE</span>
+                    </a>
+                    <a href="https://www.facebook.com/XXXX" target="_blank" class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-bgSilk px-4 py-2 text-sm font-semibold text-textDark hover:bg-crmBlue hover:text-white transition">
+                        <i class="fa-brands fa-facebook-f"></i><span>Facebook</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/celinechien" target="_blank" class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-bgSilk px-4 py-2 text-sm font-semibold text-textDark hover:bg-premiumNavy hover:text-white transition">
+                        <i class="fa-brands fa-linkedin-in"></i><span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/XXXX" target="_blank" class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-bgSilk px-4 py-2 text-sm font-semibold text-textDark hover:bg-textDark hover:text-white transition">
+                        <i class="fa-brands fa-github"></i><span>GitHub</span>
+                    </a>
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div class="text-sm text-textMuted">需要更深入的專案需求說明？請使用下方需求表單直接提交。</div>
+                    <a href="https://forms.gle/qhuad8nXdFbt1i296" target="_blank" class="inline-flex items-center justify-center rounded-full bg-textDark text-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.15em] hover:bg-premiumNavy transition">
+                        填寫需求表單
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-6">
+                <a href="https://calendar.app.google/pjgiY6JdJVad8Qtc6" target="_blank" class="premium-btn inline-flex items-center space-x-3 bg-crmBlue text-white px-10 py-5 text-xs font-semibold tracking-widest uppercase rounded-none mx-auto border border-crmBlue">
+                    <span class="btn-text-default">預約策略諮詢 Book a Strategy Session</span>
+                    <span class="btn-text-hover">Ready to Grow</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. 頁尾 Footer -->
+    <footer class="bg-textDark text-textMuted py-12 border-t border-slate-900 text-[11px] font-light">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex flex-col items-center md:items-start">
+                <span class="text-white font-semibold tracking-widest text-xs">CELINE CHIEN</span>
+                <span class="text-[9px] tracking-wider text-luxuryGold mt-0.5 uppercase font-medium">CRM Strategy & Customer Growth Advisor</span>
+            </div>
+            <p class="text-center md:text-right text-textMuted">
+                &copy; 2026 Celine Chien. All Rights Reserved. Designed for Executive Trust.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JS 核心互動特效開發 -->
+    <script>
+        // 導覽列滾動狀態與高級感陰影切換
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-bgSilk/85', 'backdrop-blur-xl', 'shadow-sm', 'border-slate-200');
+                navbar.classList.remove('border-transparent');
+            } else {
+                navbar.classList.remove('bg-bgSilk/85', 'backdrop-blur-xl', 'shadow-sm', 'border-slate-200');
+                navbar.classList.add('border-transparent');
+            }
+        });
+
+        // 行動端響應式選單切換
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 頂級打字機效果輪播文字
+        const words = ["CRM Strategy", "Customer Growth", "Client Engagement", "MarTech Transformation"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingSpeed = 100;
+        const erasingSpeed = 40;
+        const delayBetweenWords = 2200;
+        const typingElement = document.getElementById('typing-text');
+
+        function type() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                typingElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                isDeleting = true;
+                setTimeout(type, delayBetweenWords);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                setTimeout(type, 300);
+            } else {
+                setTimeout(type, isDeleting ? erasingSpeed : typingSpeed);
+            }
+        }
+
+        // 滾動顯現流暢動畫 (Scroll Reveal Animation)
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 80;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(type, 400);
+            reveal();
+        });
+        window.addEventListener('scroll', reveal);
+    </script>
+</body>
+</html>
